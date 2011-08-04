@@ -1,0 +1,36 @@
+<idea-plugin version="2" url="http://jamon.org">
+  <name>Jamon</name>
+  <description>Provides Jamon template support.</description>
+  <version>0.1.pre-alpha</version>
+
+  <vendor email="castral01@gmail.com">Ryan Brignoni</vendor>
+
+  <!--<idea-version since-build="95.627"/>-->
+  <idea-version since-build="90"/>
+  <application-components>
+
+      <component>
+          <implementation-class>org.jamon.intellij.lang.JamonPlugin</implementation-class>
+      </component>
+  </application-components>
+
+  <project-components>
+      <component>
+          <implementation-class>org.jamon.intellij.component.TranslateTemplate</implementation-class>
+      </component>
+      <component>
+          <implementation-class>org.jamon.intellij.configuration.ConfigurationState</implementation-class>
+      </component>
+  </project-components>
+
+  <actions>
+      <action id="TranslateJamon" class="org.jamon.intellij.action.TranslateAction" text="Translate Jamon"
+              description="Translate a Jamon template into Java.">
+          <add-to-group group-id="MainToolBar" anchor="after" relative-to-action="tasks.toolbar.group"/>
+      </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+      <projectConfigurable implementation="org.jamon.intellij.ui.ConfigurationPanel"/>
+  </extensions>
+</idea-plugin>
