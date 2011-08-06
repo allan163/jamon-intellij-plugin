@@ -10,7 +10,7 @@ import com.intellij.lang.Language;
  */
 public class JamonLanguage extends Language {
 
-    protected JamonLanguage() {
+    public JamonLanguage() {
         super("jamon");
     }
 }
