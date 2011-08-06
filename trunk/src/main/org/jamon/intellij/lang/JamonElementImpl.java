@@ -18,7 +18,7 @@ public class JamonElementImpl extends ASTWrapperPsiElement implements PsiElement
     }
 
     public Language getLanguage() {
-        return JamonPlugin.JAMON_LANGUAGE;
+        return JamonPlugin.JAMON.getLanguage();
     }
 
 }
