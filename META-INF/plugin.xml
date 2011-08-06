@@ -1,4 +1,4 @@
-<idea-plugin version="2" url="http://jamon.org">
+<idea-plugin version="2" url="http://code.google.com/p/jamon-intellij-plugin">
   <name>Jamon</name>
   <description>Provides Jamon template support.</description>
   <version>0.1.pre-alpha</version>
@@ -10,7 +10,7 @@
   <application-components>
 
       <component>
-          <implementation-class>org.jamon.intellij.lang.JamonPlugin</implementation-class>
+          <implementation-class>org.jamon.intellij.component.JamonPlugin</implementation-class>
       </component>
   </application-components>
 
@@ -32,5 +32,6 @@
 
   <extensions defaultExtensionNs="com.intellij">
       <projectConfigurable implementation="org.jamon.intellij.ui.ConfigurationPanel"/>
+      <lang.parserDefinition language="Jamon" implementationClass="org.jamon.intellij.lang.JamonParserDefinition" />
   </extensions>
 </idea-plugin>
