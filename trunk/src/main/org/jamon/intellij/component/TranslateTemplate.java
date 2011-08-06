@@ -5,16 +5,12 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jamon.api.TemplateParser;
 import org.jamon.intellij.configuration.ConfigurationState;
 import org.jamon.intellij.configuration.ConfigurationUtils;
-import org.jamon.intellij.proxy.TemplateProcessorHandler;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -60,10 +56,6 @@ public class TranslateTemplate extends AbstractProjectComponent {
 
         URLClassLoader classLoader = URLClassLoader.newInstance(urls);
         try {
-            InvocationHandler handler = new TemplateProcessorHandler();
-            TemplateParser parser = (TemplateParser) Proxy.newProxyInstance(TemplateParser.class.getClassLoader(), new Class[] { TemplateParser.class }, handler);
-            parser.parseTemplate("test");
-
             Class clazz = classLoader.loadClass(TEMPLATE_PROCESSOR_CLASS);
             Constructor c = clazz.getConstructor(File.class, File.class, ClassLoader.class);
             Object processor = c.newInstance(destDir, srcDir, classLoader);
