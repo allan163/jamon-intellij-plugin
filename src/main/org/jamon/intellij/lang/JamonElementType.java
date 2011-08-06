@@ -11,6 +11,6 @@ import org.jamon.intellij.component.JamonPlugin;
  */
 public class JamonElementType extends IElementType {
     public JamonElementType(String debugName) {
-        super(debugName, JamonPlugin.JAMON_LANGUAGE);
+        super(debugName, JamonPlugin.JAMON.getLanguage());
     }
 }
