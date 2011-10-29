@@ -26,6 +26,8 @@
   <actions>
       <action id="TranslateJamon" class="org.jamon.intellij.action.TranslateAction" text="Translate Jamon"
               description="Translate a Jamon template into Java.">
+          <keyboard-shortcut first-keystroke="control alt shift J" keymap="$default"/>
+          <keyboard-shortcut first-keystroke="control alt shift J" keymap="Mac OS X"/>
           <add-to-group group-id="MainToolBar" anchor="after" relative-to-action="tasks.toolbar.group"/>
       </action>
   </actions>
