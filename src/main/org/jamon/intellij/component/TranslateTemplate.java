@@ -61,9 +61,6 @@ public class TranslateTemplate extends AbstractProjectComponent {
             Object processor = c.newInstance(destDir, srcDir, classLoader);
             Method generateSource = clazz.getMethod("generateSource", String.class);
             generateSource.invoke(processor, file.getName());
-            boolean test = processor != null;
-//            logger.warn("" + test);
-//            t.generateSource(file.getName());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             Messages.showMessageDialog(myProject,
