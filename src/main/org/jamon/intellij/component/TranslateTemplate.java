@@ -21,7 +21,7 @@ import java.net.URLClassLoader;
  */
 public class TranslateTemplate extends AbstractProjectComponent {
     private static final String TEMPLATE_PROCESSOR_CLASS = "org.jamon.compiler.TemplateProcessor";
-    private static final Logger logger = Logger.getInstance(TranslateTemplate.class.getSimpleName());
+    private static final Logger LOGGER = Logger.getInstance(TranslateTemplate.class.getSimpleName());
 
     public TranslateTemplate(Project project) {
         super(project);
@@ -52,8 +52,6 @@ public class TranslateTemplate extends AbstractProjectComponent {
                 return;
         }
 
-//        FileEditorManager.getInstance(myProject).getSelectedTextEditor().getDocument();
-
         URLClassLoader classLoader = URLClassLoader.newInstance(urls);
         try {
             Class clazz = classLoader.loadClass(TEMPLATE_PROCESSOR_CLASS);
@@ -62,7 +60,7 @@ public class TranslateTemplate extends AbstractProjectComponent {
             Method generateSource = clazz.getMethod("generateSource", String.class);
             generateSource.invoke(processor, file.getName());
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
             Messages.showMessageDialog(myProject,
                     "Unable to load jamon, please check your settings.",
                     "Unable to Translate", Messages.getErrorIcon());
