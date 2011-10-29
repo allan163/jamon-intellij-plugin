@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jamon">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/jamon-dist-2011.07.07" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/jamon-dist-2011.07.07" recursive="false" />
+  </library>
+</component>
