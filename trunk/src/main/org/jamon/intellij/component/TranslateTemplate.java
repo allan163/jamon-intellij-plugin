@@ -27,11 +27,9 @@ public class TranslateTemplate extends AbstractProjectComponent {
 
     public void translateFile(VirtualFile file) {
         JamonConfig jamonConfig = Utils.getJamonConfig(myProject, file);
-        if (jamonConfig == null) {
-            return;
+        if (jamonConfig != null) {
+            translate(file, jamonConfig);
         }
-
-        translate(file, jamonConfig);
     }
 
     private void translate(VirtualFile file, JamonConfig jamonConfig) {
