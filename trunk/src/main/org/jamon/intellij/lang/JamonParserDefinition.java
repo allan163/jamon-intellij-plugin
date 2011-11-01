@@ -1,10 +1,10 @@
 package org.jamon.intellij.lang;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -22,6 +22,9 @@ import org.jetbrains.annotations.NotNull;
  * Time: 10:28 PM
  */
 public class JamonParserDefinition implements ParserDefinition {
+    public static final IFileElementType JAMON_FILE = new JamonFileElementType(JamonFileType.JAMON_LANGUAGE);
+    private static final Logger LOGGER = Logger.getInstance(JamonParserDefinition.class.getSimpleName());
+
     @NotNull
     public Lexer createLexer(Project project) {
         return new JamonParsingLexer();
@@ -32,7 +35,7 @@ public class JamonParserDefinition implements ParserDefinition {
     }
 
     public IFileElementType getFileNodeType() {
-        return JamonElementTypes.FILE;
+        return JAMON_FILE;
     }
 
     @NotNull
@@ -58,7 +61,7 @@ public class JamonParserDefinition implements ParserDefinition {
             return new JamonArgsImpl(node);
         }
 
-        return new ASTWrapperPsiElement(node);
+        return new JamonWrapperPsiElement(node);
     }
 
     public PsiFile createFile(FileViewProvider fileViewProvider) {

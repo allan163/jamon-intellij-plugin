@@ -1,6 +1,7 @@
 package org.jamon.intellij.lang;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,6 +11,10 @@ import com.intellij.lang.PsiBuilder;
  */
 public class StatementParsing {
     public static void parseSourceElement(PsiBuilder builder) {
+            IElementType token = builder.getTokenType();
+            PsiBuilder.Marker statement = builder.mark();
+            statement.done(token);
+            builder.advanceLexer();
+        }
         // TODO: Implement statement parsing
-    }
 }

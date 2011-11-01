@@ -10,7 +10,7 @@ import com.intellij.psi.tree.IElementType;
  * Time: 11:45 PM
  */
 public interface JamonTokenTypes {
-    IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
+    IElementType WHITE_SPACE = new JamonElementType("WHITE SPACE");
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
     IElementType COMMENT = new JamonElementType("COMMENT");
 }

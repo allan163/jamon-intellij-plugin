@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class JamonParser implements PsiParser {
     @NotNull
     public ASTNode parse(IElementType root, PsiBuilder builder) {
+        builder.setDebugMode(true);
         final PsiBuilder.Marker rootMarker = builder.mark();
         while (!builder.eof()) {
             StatementParsing.parseSourceElement(builder);

@@ -1,6 +1,8 @@
 package org.jamon.intellij.lang;
 
+import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import org.jamon.intellij.resource.IconResource;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -12,7 +14,11 @@ import javax.swing.*;
  * Time: 8:33 PM
  */
 public class JamonFileType extends LanguageFileType {
-    public JamonFileType() {
+    public static final JamonFileType JAMON_FILE_TYPE = new JamonFileType();
+    public static final Language JAMON_LANGUAGE = JAMON_FILE_TYPE.getLanguage();
+    public static final String DEFAULT_EXTENSION = "jamon";
+
+    private JamonFileType() {
         super(new JamonLanguage());
     }
 
@@ -23,15 +29,15 @@ public class JamonFileType extends LanguageFileType {
 
     @NotNull
     public String getDescription() {
-        return "Jamon";
+        return "Jamon Template";
     }
 
     @NotNull
     public String getDefaultExtension() {
-        return "jamon";
+        return DEFAULT_EXTENSION;
     }
 
     public Icon getIcon() {
-        return null;
+        return IconResource.get().toolbarIcon();
     }
 }
