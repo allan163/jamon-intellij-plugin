@@ -23,17 +23,16 @@ import com.intellij.psi.tree.IElementType;
 
 LETTER = [:letter:]
 DIGIT = [0-9]
-WHITESPACE = [ \n\r\t\f]+
-JAMON_TAG_START_1 = "<%"
-JAMON_TAG_CLOSE_1 = "</%"
-JAMON_TAG_END = ">"
-
-%state ARGS
-
-
+LineTerminator = \r|\n|\r\n
+InputCharacter = [^\r\n]
+WhiteSpace     = {LineTerminator} | [ \t\f]
+JAMON_TAG_START_1 = "<%args>"
+JAMON_TAG_CLOSE_1 = "</%args>"
 
 %%
-
-<YYINITIAL> {JAMON_TAG_START_1} "args" {JAMON_TAG_END} { yybegin(ARGS); return JamonElementTypes.JAMON_ARGS_START; }
-<ARGS> {JAMON_TAG_CLOSE_1} "args" {JAMON_TAG_END} { yybegin(YYINITIAL); return JamonElementTypes.JAMON_ARGS_END; }
-<ARGS> [^\<]* {return JamonElementTypes.JAMON_ARGS_CONTENT; }
+<YYINITIAL> {
+    {WhiteSpace} { }
+}
+. { return JamonElementTypes.JAMON_ANYTHING; }
+//{JAMON_TAG_START_1} { return JamonElementTypes.JAMON_ARGS_START; }
+//{JAMON_TAG_CLOSE_1} {return JamonElementTypes.JAMON_ARGS_END; }

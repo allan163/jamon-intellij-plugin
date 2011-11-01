@@ -5,7 +5,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
-import org.jamon.intellij.component.JamonPlugin;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -17,12 +16,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JamonFile extends PsiFileBase implements PsiElement {
     protected JamonFile(FileViewProvider viewProvider) {
-        super(viewProvider, JamonPlugin.JAMON.getLanguage());
+        super(viewProvider, JamonFileType.JAMON_LANGUAGE);
     }
 
     @NotNull
     public FileType getFileType() {
-        return JamonPlugin.JAMON;
+        return JamonFileType.JAMON_FILE_TYPE;
     }
 
     @Override

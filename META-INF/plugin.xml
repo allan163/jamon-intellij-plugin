@@ -34,6 +34,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
       <projectConfigurable implementation="org.jamon.intellij.ui.ConfigurationPanel"/>
-      <lang.parserDefinition language="Jamon" implementationClass="org.jamon.intellij.lang.JamonParserDefinition" />
+      <fileTypeFactory implementation="org.jamon.intellij.lang.JamonFileTypeFactory" />
+      <lang.parserDefinition language="jamon" implementationClass="org.jamon.intellij.lang.JamonParserDefinition" />
   </extensions>
 </idea-plugin>

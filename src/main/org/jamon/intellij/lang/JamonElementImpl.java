@@ -16,9 +16,4 @@ public class JamonElementImpl extends ASTWrapperPsiElement implements PsiElement
     public JamonElementImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
         super(node);
     }
-
-    public Language getLanguage() {
-        return JamonPlugin.JAMON.getLanguage();
-    }
-
 }

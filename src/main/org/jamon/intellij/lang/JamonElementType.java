@@ -1,7 +1,6 @@
 package org.jamon.intellij.lang;
 
 import com.intellij.psi.tree.IElementType;
-import org.jamon.intellij.component.JamonPlugin;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,6 +10,6 @@ import org.jamon.intellij.component.JamonPlugin;
  */
 public class JamonElementType extends IElementType {
     public JamonElementType(String debugName) {
-        super(debugName, JamonPlugin.JAMON.getLanguage());
+        super(debugName, JamonFileType.JAMON_LANGUAGE);
     }
 }
