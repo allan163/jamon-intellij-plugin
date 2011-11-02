@@ -33,8 +33,14 @@
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
-      <projectConfigurable implementation="org.jamon.intellij.ui.ConfigurationPanel"/>
+      <projectConfigurable implementation="org.jamon.intellij.ui.ProjectConfigurationPanel"/>
+      <moduleConfigurable implementation="org.jamon.intellij.ui.ModuleConfigurationTab" />
       <fileTypeFactory implementation="org.jamon.intellij.lang.JamonFileTypeFactory" />
       <lang.parserDefinition language="jamon" implementationClass="org.jamon.intellij.lang.JamonParserDefinition" />
   </extensions>
+    <module-components>
+        <component>
+            <implementation-class>org.jamon.intellij.component.ModuleOutputComponent</implementation-class>
+        </component>
+    </module-components>
 </idea-plugin>
