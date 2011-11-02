@@ -48,4 +48,9 @@ public class TranslateTemplate extends AbstractProjectComponent {
                 "Unable to Translate", Messages.getErrorIcon());
         }
     }
+
+    @Override
+    public void disposeComponent() {
+
+    }
 }
