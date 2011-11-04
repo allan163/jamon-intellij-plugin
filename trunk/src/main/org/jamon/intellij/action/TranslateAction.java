@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.project.Project;
-import org.jamon.intellij.resource.IconResource;
+import org.jamon.intellij.resource.JamonIconProvider;
 import org.jamon.intellij.component.TranslateTemplate;
 
 /**
@@ -15,7 +15,7 @@ import org.jamon.intellij.component.TranslateTemplate;
  */
 public class TranslateAction extends AnAction {
     public TranslateAction() {
-        super("", "", IconResource.get().toolbarIcon());
+        super("", "", JamonIconProvider.JAMON_ICON_24);
     }
 
     public void actionPerformed(AnActionEvent e) {

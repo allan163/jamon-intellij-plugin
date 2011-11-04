@@ -3,14 +3,13 @@ package org.jamon.intellij.action;
 import com.intellij.CommonBundle;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.ide.actions.CreateTemplateInPackageAction;
-import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import org.jamon.intellij.lang.JamonFile;
 import org.jamon.intellij.lang.JamonFileType;
-import org.jamon.intellij.resource.IconResource;
+import org.jamon.intellij.resource.JamonIconProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -23,9 +22,7 @@ public class NewJamonTemplateAction extends CreateTemplateInPackageAction<JamonF
 
     protected NewJamonTemplateAction() {
         super("Jamon Template", "Creates new Jamon Template",
-                IconResource.get().toolbarIcon(), true);
-//        FileTemplateManager.getInstance().addTemplate("Jamon.jamon",
-//                JamonFileType.DEFAULT_EXTENSION);
+                JamonIconProvider.JAMON_ICON_16, true);
     }
 
     @Override
@@ -40,7 +37,7 @@ public class NewJamonTemplateAction extends CreateTemplateInPackageAction<JamonF
                                                                PsiDirectory psiDirectory) {
         final CreateFileFromTemplateDialog.Builder builder = CreateFileFromTemplateDialog.
                 createDialog(project, "New Jamon Template");
-        builder.addKind("Template", IconResource.get().toolbarIcon(), "Jamon.jamon");
+        builder.addKind("Template", JamonIconProvider.JAMON_ICON_16, "Jamon.jamon");
         return builder;
     }
 
