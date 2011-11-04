@@ -29,7 +29,7 @@ public class JamonFileType extends LanguageFileType {
 
     @NotNull
     public String getDescription() {
-        return "Jamon Template";
+        return "Jamon";
     }
 
     @NotNull

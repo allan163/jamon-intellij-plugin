@@ -5,6 +5,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jamon.intellij.util.Utils;
 
 import java.io.File;
@@ -41,6 +42,8 @@ public class TranslateTemplate extends AbstractProjectComponent {
                 classLoader);
             Method generateSource = clazz.getMethod("generateSource", String.class);
             generateSource.invoke(processor, file.getName());
+            // Refresh the VFS to pick up the newly translated Proxy/Impl classes.
+            VirtualFileManager.getInstance().refresh(true);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             Messages.showMessageDialog(myProject,
