@@ -6,7 +6,7 @@ import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
-import org.jamon.intellij.resource.IconResource;
+import org.jamon.intellij.resource.JamonIconProvider;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -24,7 +24,7 @@ public class JamonTemplateFactory implements FileTemplateGroupDescriptorFactory 
 
     public FileTemplateGroupDescriptor getFileTemplatesDescriptor() {
         FileTemplateGroupDescriptor group =
-                new FileTemplateGroupDescriptor("Jamon", IconResource.get().toolbarIcon());
+                new FileTemplateGroupDescriptor("Jamon", JamonIconProvider.JAMON_ICON_16);
         FileTypeManager manager = FileTypeManager.getInstance();
         for (String template : TEMPLATES) {
             group.addTemplate(new FileTemplateDescriptor(template,

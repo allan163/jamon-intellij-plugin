@@ -8,7 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import org.apache.commons.lang.StringUtils;
 import org.jamon.intellij.configuration.ConfigurationState;
-import org.jamon.intellij.resource.IconResource;
+import org.jamon.intellij.resource.JamonIconProvider;
 import org.jetbrains.annotations.Nls;
 
 import javax.swing.*;
@@ -41,7 +41,7 @@ public class ModuleConfigurationTab implements Configurable {
     }
 
     public Icon getIcon() {
-        return IconResource.get().toolbarIcon();
+        return JamonIconProvider.JAMON_ICON_16;
     }
 
     public String getHelpTopic() {

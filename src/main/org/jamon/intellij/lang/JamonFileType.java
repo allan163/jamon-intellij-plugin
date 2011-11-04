@@ -2,7 +2,7 @@ package org.jamon.intellij.lang;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import org.jamon.intellij.resource.IconResource;
+import org.jamon.intellij.resource.JamonIconProvider;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -38,6 +38,6 @@ public class JamonFileType extends LanguageFileType {
     }
 
     public Icon getIcon() {
-        return IconResource.get().toolbarIcon();
+        return JamonIconProvider.JAMON_ICON_16;
     }
 }
