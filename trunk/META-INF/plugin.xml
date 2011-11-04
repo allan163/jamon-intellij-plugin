@@ -7,13 +7,6 @@
 
   <!--<idea-version since-build="95.627"/>-->
   <idea-version since-build="90"/>
-  <application-components>
-
-      <component>
-          <implementation-class>org.jamon.intellij.component.JamonPlugin</implementation-class>
-      </component>
-  </application-components>
-
   <project-components>
       <component>
           <implementation-class>org.jamon.intellij.component.TranslateTemplate</implementation-class>
@@ -30,9 +23,14 @@
           <keyboard-shortcut first-keystroke="control alt shift J" keymap="Mac OS X"/>
           <add-to-group group-id="MainToolBar" anchor="after" relative-to-action="tasks.toolbar.group"/>
       </action>
+      <action id="CreateJamonFile" class="org.jamon.intellij.action.NewJamonTemplateAction"
+              text="Jamon" description="Create a new Jamon file.">
+          <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
+      </action>
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
+      <fileTemplateGroup implementation="org.jamon.intellij.action.JamonTemplateFactory" />
       <projectConfigurable implementation="org.jamon.intellij.ui.ProjectConfigurationPanel"/>
       <moduleConfigurable implementation="org.jamon.intellij.ui.ModuleConfigurationTab" />
       <fileTypeFactory implementation="org.jamon.intellij.lang.JamonFileTypeFactory" />

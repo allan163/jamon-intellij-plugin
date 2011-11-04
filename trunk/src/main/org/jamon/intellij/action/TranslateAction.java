@@ -23,7 +23,8 @@ public class TranslateAction extends AnAction {
         Project project = DataKeys.PROJECT.getData(dataContext);
 
         if (project != null) {
-            project.getComponent(TranslateTemplate.class).translateFile(DataKeys.VIRTUAL_FILE.getData(dataContext));
+            project.getComponent(TranslateTemplate.class)
+                    .translateFile(DataKeys.VIRTUAL_FILE.getData(dataContext));
         }
     }
 }

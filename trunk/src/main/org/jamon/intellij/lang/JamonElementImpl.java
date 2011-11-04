@@ -2,9 +2,7 @@ package org.jamon.intellij.lang;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
-import org.jamon.intellij.component.JamonPlugin;
 
 /**
  * Created by IntelliJ IDEA.
