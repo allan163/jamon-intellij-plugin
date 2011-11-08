@@ -44,24 +44,24 @@ TAG_CLOSE_PERCENT = "</%"
     {WHITESPACE} { }
 }
 //{TAG_START_PERCENT} { yybegin(PERCENT_TAG); return JamonTokenTypes.TAG_START_PERCENT;}
-<PERCENT_TAG> {
-//    ">"             { yybegin(YYINITIAL);    return JamonTokenTypes.GENERIC_TAG_END; }
-    "args>"         { output.setLength(0); yybegin(TAG_CONTENT);  return JamonElementTypes.ARGS_START;    }
-    "import>"       { output.setLength(0); yybegin(TAG_CONTENT);  return JamonElementTypes.IMPORT_START;  }
-
-    {WHITESPACE}    { output.setLength(0); yybegin(TAG_EMIT); return JamonTokenTypes.WHITE_SPACE; }
-
-    <TAG_EMIT> {
-        {TAG_END_PERCENT}   { yybegin(YYINITIAL); return new JamonElement("EMIT").setRawContent(output.toString()); }
-        .                   { output.append( yytext() ); }
-    }
-
-    <TAG_CONTENT> {
-        {TAG_CLOSE_PERCENT} { yybegin(PERCENT_TAG); return new JamonElement("TAG_CLOSE_PERCENT").setRawContent(output.toString()); }
-        .                   { output.append( yytext() ); }
-    }
-    // todo: capture end percent tag
-}
+//<PERCENT_TAG> {
+////    ">"             { yybegin(YYINITIAL);    return JamonTokenTypes.GENERIC_TAG_END; }
+//    "args>"         { output.setLength(0); yybegin(TAG_CONTENT);  return JamonElementTypes.ARGS_START;    }
+//    "import>"       { output.setLength(0); yybegin(TAG_CONTENT);  return JamonElementTypes.IMPORT_START;  }
+//
+//    {WHITESPACE}    { output.setLength(0); yybegin(TAG_EMIT); return JamonTokenTypes.WHITE_SPACE; }
+//
+//    <TAG_EMIT> {
+//        {TAG_END_PERCENT}   { yybegin(YYINITIAL); return new JamonElement("EMIT").setRawContent(output.toString()); }
+//        .                   { output.append( yytext() ); }
+//    }
+//
+//    <TAG_CONTENT> {
+//        {TAG_CLOSE_PERCENT} { yybegin(PERCENT_TAG); return new JamonElement("TAG_CLOSE_PERCENT").setRawContent(output.toString()); }
+//        .                   { output.append( yytext() ); }
+//    }
+//    // todo: capture end percent tag
+//}
 
 // Bad things happened.
 . {

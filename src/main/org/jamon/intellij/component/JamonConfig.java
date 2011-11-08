@@ -4,18 +4,16 @@ import java.io.File;
 import java.net.URL;
 
 public class JamonConfig {
-    private final URL[] jamonLibUrls;
+    private final File[] jamonLibFiles;
+    private final String templateName;
     private final File srcDir;
     private final File destDir;
 
-    public JamonConfig(URL[] jamonLibUrls, File srcDir, File destDir) {
-        this.jamonLibUrls = jamonLibUrls;
+    public JamonConfig(File[] jamonLibFiles,  File srcDir, File destDir, String target) {
+        this.jamonLibFiles = jamonLibFiles;
+        this.templateName = target;
         this.srcDir = srcDir;
         this.destDir = destDir;
-    }
-
-    public URL[] getJamonLibUrls() {
-        return jamonLibUrls;
     }
 
     public File getSrcDir() {
@@ -24,5 +22,13 @@ public class JamonConfig {
 
     public File getDestDir() {
         return destDir;
+    }
+
+    public File[] getJamonLibFiles() {
+        return jamonLibFiles;
+    }
+
+    public String getTemplateName() {
+        return templateName;
     }
 }
