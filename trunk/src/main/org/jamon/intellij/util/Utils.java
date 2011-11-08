@@ -16,10 +16,10 @@ public class Utils {
     public static JamonConfig getJamonConfig(Project project, VirtualFile file) {
         ConfigurationState state = project.getComponent(ConfigurationState.class);
 
-        URL[] jamonLibUrls = ConfigurationUtils.getJamonUrls(state);
+        File[] jamonFiles = ConfigurationUtils.getJamonFiles(state);
 
-        for (URL url : jamonLibUrls) {
-            if (url.getFile().isEmpty()) {
+        for (File jarFile : jamonFiles) {
+            if (!jarFile.exists()) {
                 Messages.showMessageDialog(project,
                     "It appears that the Jamon plugin has not been properly configured yet.",
                     "Jamon Not Found", Messages.getErrorIcon());
@@ -39,6 +39,6 @@ public class Utils {
             return null;
         }
 
-        return new JamonConfig(jamonLibUrls, srcDir, destDir);
+        return new JamonConfig(jamonFiles, srcDir, destDir, file.getName());
     }
 }

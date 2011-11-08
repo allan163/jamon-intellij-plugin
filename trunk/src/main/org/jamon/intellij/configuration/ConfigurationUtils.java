@@ -1,8 +1,8 @@
 package org.jamon.intellij.configuration;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -12,22 +12,21 @@ import java.net.URL;
  * Time: 11:00 PM
  */
 public class ConfigurationUtils {
-    private static final Logger logger = Logger.getInstance(ConfigurationUtils.class.getSimpleName());
+    private static final Logger LOGGER = Logger.getInstance(ConfigurationUtils.class.getSimpleName());
 
-    public static URL[] getJamonUrls(final ConfigurationState state) {
-        return convertPathsToURLArray(state.jamonRuntimeJar, state.jamonApiJar, state.jamonProcessorJar);
+    public static File[] getJamonFiles(final ConfigurationState state) {
+        return convertPathsToFileArray(state.jamonRuntimeJar, state.jamonApiJar, state.jamonProcessorJar);
     }
 
-    private static URL[] convertPathsToURLArray(String... paths) {
-        URL[] urlPaths = new URL[paths.length];
+    private static File[] convertPathsToFileArray(String... paths) {
+        File[] files = new File[paths.length];
         for (int i = 0; i < paths.length; i++) {
             try {
-                urlPaths[i] = new URL("file", "", paths[i]);
-            } catch (MalformedURLException e) {
-                logger.warn(e.getMessage(), e);
+                files[i] = new File(paths[i]);
+            } catch (Exception e) {
+                LOGGER.warn(e.getMessage(), e);
             }
         }
-
-        return urlPaths;
+        return files;
     }
 }

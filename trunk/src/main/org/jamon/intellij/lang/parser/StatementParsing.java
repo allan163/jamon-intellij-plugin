@@ -3,6 +3,7 @@ package org.jamon.intellij.lang.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.tree.IElementType;
+import org.jamon.intellij.lang.lexer.JamonTokenTypes;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,11 +15,12 @@ public class StatementParsing {
     private static Logger LOGGER = Logger.getInstance(StatementParsing.class.getSimpleName());
     public static void parseSourceElement(PsiBuilder builder) {
         IElementType token = builder.getTokenType();
-//        if (token != null && !token.toString().equals(JamonElementTypes.JAMON_ANYTHING.toString())) {
-//            LOGGER.warn(token.toString());
-//        }
-        PsiBuilder.Marker statement = builder.mark();
-        statement.done(token);
+
+        if (token != JamonTokenTypes.BAD_CHARACTER) {
+            PsiBuilder.Marker statement = builder.mark();
+            statement.done(token);
+        }
+
         builder.advanceLexer();
     }
         // TODO: Implement statement parsing
