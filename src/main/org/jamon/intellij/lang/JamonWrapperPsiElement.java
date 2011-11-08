@@ -3,6 +3,7 @@ package org.jamon.intellij.lang;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import org.jamon.intellij.lang.file.JamonFileType;
 import org.jetbrains.annotations.NotNull;
 
 /**

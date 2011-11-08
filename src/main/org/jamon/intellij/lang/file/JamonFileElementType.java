@@ -1,4 +1,4 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.file;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.tree.IFileElementType;

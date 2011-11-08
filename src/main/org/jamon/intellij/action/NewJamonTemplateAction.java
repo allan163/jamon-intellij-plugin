@@ -7,8 +7,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import org.jamon.intellij.lang.JamonFile;
-import org.jamon.intellij.lang.JamonFileType;
+import org.jamon.intellij.lang.file.JamonFile;
+import org.jamon.intellij.lang.file.JamonFileType;
 import org.jamon.intellij.resource.JamonIconProvider;
 import org.jetbrains.annotations.NotNull;
 

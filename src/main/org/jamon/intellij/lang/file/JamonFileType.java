@@ -1,7 +1,8 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.file;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import org.jamon.intellij.lang.JamonLanguage;
 import org.jamon.intellij.resource.JamonIconProvider;
 import org.jetbrains.annotations.NotNull;
 

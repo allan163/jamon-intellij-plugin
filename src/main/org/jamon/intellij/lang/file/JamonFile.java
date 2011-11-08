@@ -1,4 +1,4 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.file;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * Time: 11:48 PM
  */
 public class JamonFile extends PsiFileBase implements PsiElement {
-    protected JamonFile(FileViewProvider viewProvider) {
+    public JamonFile(FileViewProvider viewProvider) {
         super(viewProvider, JamonFileType.JAMON_LANGUAGE);
     }
 
