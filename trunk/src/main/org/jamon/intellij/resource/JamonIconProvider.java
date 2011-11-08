@@ -3,7 +3,7 @@ package org.jamon.intellij.resource;
 import com.intellij.ide.IconProvider;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiElement;
-import org.jamon.intellij.lang.JamonFile;
+import org.jamon.intellij.lang.file.JamonFile;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

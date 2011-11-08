@@ -1,4 +1,4 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 

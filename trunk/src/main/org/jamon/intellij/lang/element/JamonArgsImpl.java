@@ -1,7 +1,8 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.element;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import org.jamon.intellij.lang.element.JamonElementImpl;
 
 /**
  * Created by IntelliJ IDEA.

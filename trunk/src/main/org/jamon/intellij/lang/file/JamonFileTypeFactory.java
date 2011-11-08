@@ -1,6 +1,5 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.file;
 
-import com.intellij.openapi.fileTypes.ExtensionFileNameMatcher;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
 import org.jetbrains.annotations.NotNull;

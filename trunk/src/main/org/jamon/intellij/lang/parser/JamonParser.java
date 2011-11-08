@@ -1,4 +1,4 @@
-package org.jamon.intellij.lang;
+package org.jamon.intellij.lang.parser;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;

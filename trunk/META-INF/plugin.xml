@@ -34,8 +34,8 @@
       <fileTemplateGroup implementation="org.jamon.intellij.action.JamonTemplateFactory" />
       <projectConfigurable implementation="org.jamon.intellij.ui.ProjectConfigurationPanel"/>
       <moduleConfigurable implementation="org.jamon.intellij.ui.ModuleConfigurationTab" />
-      <fileTypeFactory implementation="org.jamon.intellij.lang.JamonFileTypeFactory" />
-      <lang.parserDefinition language="jamon" implementationClass="org.jamon.intellij.lang.JamonParserDefinition" />
+      <fileTypeFactory implementation="org.jamon.intellij.lang.file.JamonFileTypeFactory" />
+      <lang.parserDefinition language="jamon" implementationClass="org.jamon.intellij.lang.parser.JamonParserDefinition" />
   </extensions>
     <module-components>
         <component>
