@@ -13,7 +13,7 @@ import java.io.File;
 import java.net.URL;
 
 public class Utils {
-    public static JamonConfig getJamonConfig(Project project, VirtualFile file) {
+    public static JamonConfig getJamonConfig(Project project, VirtualFile file, VirtualFile srcDir) {
         ConfigurationState state = project.getComponent(ConfigurationState.class);
 
         File[] jamonFiles = ConfigurationUtils.getJamonFiles(state);
@@ -27,7 +27,6 @@ public class Utils {
             }
         }
 
-        File srcDir = new File(file.getParent().getPresentableUrl());
         Module module = ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(file);
         File destDir = new File(state.getOutputDirectory(module));
         destDir.mkdirs();
@@ -39,6 +38,6 @@ public class Utils {
             return null;
         }
 
-        return new JamonConfig(jamonFiles, srcDir, destDir, file.getName());
+        return new JamonConfig(jamonFiles, srcDir, destDir, file);
     }
 }

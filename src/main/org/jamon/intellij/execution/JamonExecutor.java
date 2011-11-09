@@ -2,6 +2,7 @@ package org.jamon.intellij.execution;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.JavaParameters;
+import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.process.DefaultJavaProcessHandler;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessAdapter;
@@ -14,6 +15,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowId;
@@ -50,27 +52,39 @@ public class JamonExecutor {
         this.console = consoleView;
     }
 
-    public static JavaParameters createJavaParameters(JamonConfig jamonConfig) {
+    public JavaParameters createJavaParameters() {
         final JavaParameters params = new JavaParameters();
 
-        params.setWorkingDirectory(jamonConfig.getSrcDir());
+        params.setWorkingDirectory(config.getSrcDir().getPath());
         params.setJdk(ProjectJdkTable.getInstance().findMostRecentSdkOfType(JavaSdk.getInstance()));
 
-        for (File file : jamonConfig.getJamonLibFiles()) {
+        for (File file : config.getJamonLibFiles()) {
             params.getClassPath().add(file);
         }
 
         params.setMainClass(JAMON_MAIN_CLASS);
 
-        params.getProgramParametersList().add("--destDir=" + jamonConfig.getDestDir().getAbsolutePath());
-        params.getProgramParametersList().add(jamonConfig.getTemplateName());
+        setJamonArguments(params);
 
         return params;
     }
 
+    private  void setJamonArguments(JavaParameters params) {
+        ParametersList parameters = params.getProgramParametersList();
+        parameters.add("--destDir=" + config.getDestDir().getAbsolutePath());
+        parameters.add("--srcDir=" + config.getSrcDir().getPresentableUrl());
+        parameters.add(getRelativePathForFile(config.getSrcDir(), config.getTemplate()));
+    }
+
+    private static String getRelativePathForFile(VirtualFile srcDir, VirtualFile template) {
+        String filePath = template.getPresentableUrl();
+        filePath = filePath.replace(srcDir.getPresentableUrl(), "");
+        return filePath;
+    }
+
     public void execute() {
         try {
-            processHandler = new DefaultJavaProcessHandler(createJavaParameters(config)) {
+            processHandler = new DefaultJavaProcessHandler(createJavaParameters()) {
                 @Override
                 public void notifyTextAvailable(String text, Key outputType) {
                     super.notifyTextAvailable(text, outputType);

@@ -9,9 +9,6 @@
   <idea-version since-build="90"/>
   <project-components>
       <component>
-          <implementation-class>org.jamon.intellij.component.TranslateTemplate</implementation-class>
-      </component>
-      <component>
           <implementation-class>org.jamon.intellij.configuration.ConfigurationState</implementation-class>
       </component>
   </project-components>

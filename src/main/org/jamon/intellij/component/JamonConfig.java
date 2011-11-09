@@ -1,22 +1,23 @@
 package org.jamon.intellij.component;
 
+import com.intellij.openapi.vfs.VirtualFile;
+
 import java.io.File;
-import java.net.URL;
 
 public class JamonConfig {
     private final File[] jamonLibFiles;
-    private final String templateName;
-    private final File srcDir;
+    private final VirtualFile template;
+    private final VirtualFile srcDir;
     private final File destDir;
 
-    public JamonConfig(File[] jamonLibFiles,  File srcDir, File destDir, String target) {
+    public JamonConfig(File[] jamonLibFiles, VirtualFile srcDir, File destDir, VirtualFile target) {
         this.jamonLibFiles = jamonLibFiles;
-        this.templateName = target;
+        this.template = target;
         this.srcDir = srcDir;
         this.destDir = destDir;
     }
 
-    public File getSrcDir() {
+    public VirtualFile getSrcDir() {
         return srcDir;
     }
 
@@ -28,7 +29,7 @@ public class JamonConfig {
         return jamonLibFiles;
     }
 
-    public String getTemplateName() {
-        return templateName;
+    public VirtualFile getTemplate() {
+        return template;
     }
 }
