@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class JamonExecutor {
     private static final String JAMON_MAIN_CLASS = "org.jamon.compiler.TemplateProcessor";
-    private static final Key<JamonExecutor> CONSOLE_KEY = Key.create("MAVEN_CONSOLE_KEY");
+    private static final Key<JamonExecutor> CONSOLE_KEY = Key.create("JAMON_CONSOLE_KEY");
     public static final String CONSOLE_TITLE = "Jamon";
 
     private final AtomicBoolean isOpen = new AtomicBoolean(false);
