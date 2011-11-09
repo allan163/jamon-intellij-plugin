@@ -3,8 +3,6 @@ package org.jamon.intellij.configuration;
 import com.intellij.openapi.diagnostic.Logger;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * User: Ryan Brignoni
