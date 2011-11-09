@@ -68,9 +68,9 @@ public class ProjectConfigurationPanel implements Configurable {
 
         if (!StringUtils.isEmpty(runtime) && !runtime.equals(configuration.jamonRuntimeJar)) {
             return true;
-        } else if(StringUtils.isEmpty(api) && !api.equals(configuration.jamonApiJar)) {
+        } else if(!StringUtils.isEmpty(api) && !api.equals(configuration.jamonApiJar)) {
             return true;
-        } else if (StringUtils.isEmpty(processor) && !processor.equals(configuration.jamonProcessorJar)) {
+        } else if (!StringUtils.isEmpty(processor) && !processor.equals(configuration.jamonProcessorJar)) {
             return true;
         }
 
