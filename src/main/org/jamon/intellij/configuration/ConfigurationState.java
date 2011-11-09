@@ -10,6 +10,7 @@ import com.intellij.util.xmlb.annotations.Property;
 import com.intellij.util.xmlb.annotations.Tag;
 import org.apache.commons.lang.StringUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,10 @@ import java.util.Map;
  */
 @State(name = "JamonPlugin", storages = {@Storage(id = "other", file="$PROJECT_FILE$")})
 public class ConfigurationState implements PersistentStateComponent<ConfigurationState> {
-    public static final String DEFAULT_OUTPUT_FOLDER = "generated-src";
+    public static final String DEFAULT_OUTPUT_FOLDER =
+            File.separator + "target" +
+            File.separator + "generated-sources" +
+            File.separator + "jamon";
 
     public String jamonRuntimeJar = "";
     public String jamonApiJar = "";
@@ -47,7 +51,11 @@ public class ConfigurationState implements PersistentStateComponent<Configuratio
     }
 
     public void setOutputDirectory(Module module, String outputDir) {
-        outputDirectories.put(module.getName(), StringUtils.isEmpty(outputDir) ? DEFAULT_OUTPUT_FOLDER : outputDir);
+        String defaultOutput =
+                module.getModuleFile().getParent().getPresentableUrl() + DEFAULT_OUTPUT_FOLDER;
+
+        outputDirectories.put(module.getName(),
+                StringUtils.isEmpty(outputDir) ? defaultOutput : outputDir);
     }
 
     public ConfigurationState getState() {
