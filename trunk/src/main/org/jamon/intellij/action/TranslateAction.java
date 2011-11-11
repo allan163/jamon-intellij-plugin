@@ -12,7 +12,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jamon.intellij.component.JamonConfig;
+import org.jamon.intellij.configuration.JamonConfig;
 import org.jamon.intellij.configuration.ConfigurationUtils;
 import org.jamon.intellij.execution.JamonConsole;
 import org.jamon.intellij.execution.JamonExecutor;

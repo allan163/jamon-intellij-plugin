@@ -9,7 +9,7 @@ import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jamon.intellij.component.JamonConfig;
+import org.jamon.intellij.configuration.JamonConfig;
 
 import java.io.File;
 
