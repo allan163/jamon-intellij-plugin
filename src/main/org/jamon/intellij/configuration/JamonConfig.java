@@ -1,4 +1,4 @@
-package org.jamon.intellij.component;
+package org.jamon.intellij.configuration;
 
 import com.intellij.openapi.vfs.VirtualFile;
 
