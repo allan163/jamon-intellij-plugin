@@ -26,8 +26,7 @@ public class NewJamonTemplateAction extends CreateTemplateInPackageAction<JamonF
     }
 
     @Override
-    protected PsiElement getNavigationElement(@NotNull JamonFile
-                                                          jamonFile) {
+    protected PsiElement getNavigationElement(@NotNull JamonFile jamonFile) {
         return jamonFile;
     }
 
@@ -42,13 +41,12 @@ public class NewJamonTemplateAction extends CreateTemplateInPackageAction<JamonF
     }
 
     @Override
-    protected JamonFile doCreate(PsiDirectory directory, String templateName,
-                                               String templateType)
+    protected JamonFile doCreate(PsiDirectory directory, String templateName, String templateType)
             throws IncorrectOperationException {
 
         final String fileName = templateName + "." + JamonFileType.DEFAULT_EXTENSION;
 
-        return (JamonFile)JamonTemplateFactory
+        return (JamonFile) JamonTemplateFactory
                 .createFromTemplate(directory, templateName, fileName, templateType);
     }
 

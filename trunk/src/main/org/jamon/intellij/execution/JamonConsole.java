@@ -7,9 +7,6 @@ import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.components.ComponentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -19,6 +16,7 @@ import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.MessageView;
+import org.jamon.intellij.util.Utils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -68,23 +66,12 @@ public class JamonConsole {
 
     private void ensureAttachedToToolWindow() {
         if (isOpen.compareAndSet(false, true)) {
-            invokeLater(myProject, new ConsoleVisibilityHelper());
+            Utils.invokeLater(myProject, new ConsoleVisibilityHelper());
         }
     }
 
     public boolean isFinished() {
         return finished;
-    }
-
-    private static void invokeLater(final ComponentManager p, final Runnable r) {
-        final ModalityState state = ModalityState.defaultModalityState();
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-            public void run() {
-                if (!p.isDisposed()) {
-                    r.run();
-                }
-            }
-        }, state);
     }
 
     private static ConsoleView createConsoleView(Project project) {
