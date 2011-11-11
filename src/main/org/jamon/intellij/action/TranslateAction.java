@@ -12,6 +12,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jamon.intellij.component.JamonConfig;
+import org.jamon.intellij.execution.JamonConsole;
 import org.jamon.intellij.execution.JamonExecutor;
 import org.jamon.intellij.lang.file.JamonFileType;
 import org.jamon.intellij.resource.JamonIconProvider;
@@ -53,11 +54,10 @@ public class TranslateAction extends AnAction {
 
     private void translateTemplate(Project project, VirtualFile srcDir, VirtualFile file) {
         JamonConfig jamonConfig = Utils.getJamonConfig(project, file, srcDir);
-        ConsoleView console =
-                TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
+        JamonConsole console = new JamonConsole(project);
 
         if (jamonConfig != null) {
-            new JamonExecutor(project, jamonConfig, console).execute();
+            new JamonExecutor(jamonConfig, console).execute();
         }
     }
 }
