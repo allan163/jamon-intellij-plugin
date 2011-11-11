@@ -10,11 +10,11 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jamon.intellij.component.JamonConfig;
+import org.jamon.intellij.configuration.ConfigurationUtils;
 import org.jamon.intellij.execution.JamonConsole;
 import org.jamon.intellij.execution.JamonExecutor;
 import org.jamon.intellij.lang.file.JamonFileType;
 import org.jamon.intellij.resource.JamonIconProvider;
-import org.jamon.intellij.util.Utils;
 
 /**
  * User: Ryan Brignoni
@@ -51,7 +51,7 @@ public class TranslateAction extends AnAction {
     }
 
     private void translateTemplate(Project project, VirtualFile srcDir, VirtualFile file) {
-        JamonConfig jamonConfig = Utils.getJamonConfig(project, file, srcDir);
+        JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, file, srcDir);
         JamonConsole console = new JamonConsole(project);
 
         if (jamonConfig != null) {

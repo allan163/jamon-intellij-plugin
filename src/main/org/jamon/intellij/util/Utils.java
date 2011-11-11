@@ -1,43 +1,18 @@
 package org.jamon.intellij.util;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.vfs.VirtualFile;
-import org.jamon.intellij.component.JamonConfig;
-import org.jamon.intellij.configuration.ConfigurationState;
-import org.jamon.intellij.configuration.ConfigurationUtils;
-
-import java.io.File;
-import java.net.URL;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.components.ComponentManager;
 
 public class Utils {
-    public static JamonConfig getJamonConfig(Project project, VirtualFile file, VirtualFile srcDir) {
-        ConfigurationState state = project.getComponent(ConfigurationState.class);
-
-        File[] jamonFiles = ConfigurationUtils.getJamonFiles(state);
-
-        for (File jarFile : jamonFiles) {
-            if (!jarFile.exists()) {
-                Messages.showMessageDialog(project,
-                    "It appears that the Jamon plugin has not been properly configured yet.",
-                    "Jamon Not Found", Messages.getErrorIcon());
-                return null;
+    public static void invokeLater(final ComponentManager p, final Runnable r) {
+        final ModalityState state = ModalityState.defaultModalityState();
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            public void run() {
+                if (!p.isDisposed()) {
+                    r.run();
+                }
             }
-        }
-
-        Module module = ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(file);
-        File destDir = new File(state.getOutputDirectory(module));
-        destDir.mkdirs();
-
-        if (state.getOutputDirectories().isEmpty() || !destDir.exists() || !destDir.isDirectory()) {
-            Messages.showMessageDialog(project,
-                    "It appears that the Jamon plugin has not been properly configured yet.",
-                    "No Output Directory", Messages.getErrorIcon());
-            return null;
-        }
-
-        return new JamonConfig(jamonFiles, srcDir, destDir, file);
+        }, state);
     }
 }
