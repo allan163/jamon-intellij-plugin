@@ -5,11 +5,14 @@ import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.process.DefaultJavaProcessHandler;
 import com.intellij.execution.process.OSProcessHandler;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jamon.intellij.configuration.JamonConfig;
+import org.jamon.intellij.util.Utils;
 
 import java.io.File;
 
@@ -22,12 +25,14 @@ import java.io.File;
 public class JamonExecutor {
     private static final String JAMON_MAIN_CLASS = "org.jamon.compiler.TemplateProcessor";
 
+    private final Project project;
     private final JamonConfig config;
     private final JamonConsole console;
 
     private OSProcessHandler processHandler;
 
-    public JamonExecutor(JamonConfig jamonConfig, JamonConsole console) {
+    public JamonExecutor(Project project, JamonConfig jamonConfig, JamonConsole console) {
+        this.project = project;
         this.config = jamonConfig;
         this.console = console;
     }
@@ -53,13 +58,7 @@ public class JamonExecutor {
         ParametersList parameters = params.getProgramParametersList();
         parameters.add("--destDir=" + config.getDestDir().getAbsolutePath());
         parameters.add("--srcDir=" + config.getSrcDir().getPresentableUrl());
-        parameters.add(getRelativePathForFile(config.getSrcDir(), config.getTemplate()));
-    }
-
-    private static String getRelativePathForFile(VirtualFile srcDir, VirtualFile template) {
-        String filePath = template.getPresentableUrl();
-        filePath = filePath.replace(srcDir.getPresentableUrl(), "");
-        return filePath;
+        parameters.add(Utils.getRelativePathForFile(config.getSrcDir(), config.getTemplate()));
     }
 
     public void execute() {
@@ -69,6 +68,14 @@ public class JamonExecutor {
         } catch (ExecutionException e) {
             console.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
         }
+
+        processHandler.addProcessListener(new ProcessAdapter() {
+            @Override
+            public void processTerminated(ProcessEvent event) {
+                // todo: make this execute only if the translation completed successfully.
+                Utils.invokeLater(project, new JamonSourceCompiler(project, config));
+            }
+        });
 
         processHandler.startNotify();
         processHandler.waitFor();

@@ -12,8 +12,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jamon.intellij.configuration.JamonConfig;
 import org.jamon.intellij.configuration.ConfigurationUtils;
+import org.jamon.intellij.configuration.JamonConfig;
 import org.jamon.intellij.execution.JamonConsole;
 import org.jamon.intellij.execution.JamonExecutor;
 import org.jamon.intellij.lang.file.JamonFileType;
@@ -33,19 +33,20 @@ public class TranslateAction extends AnAction {
         DataContext dataContext = e.getDataContext();
         Project project = DataKeys.PROJECT.getData(dataContext);
         Module module = DataKeys.MODULE.getData(dataContext);
-        VirtualFile file = DataKeys.VIRTUAL_FILE.getData(dataContext);
+        VirtualFile template = DataKeys.VIRTUAL_FILE.getData(dataContext);
         ModuleRootManager manager = ModuleRootManager.getInstance(module);
 
-        if (file != null && JamonFileType.DEFAULT_EXTENSION.equals(file.getExtension())) {
-            VirtualFile srcDir = getSourcePath(manager, file);
-            translateTemplate(project, srcDir, file);
+        if (template != null && JamonFileType.DEFAULT_EXTENSION.equals(template.getExtension())) {
+            VirtualFile srcDir = getSourcePath(manager, template);
+            translateTemplate(project, srcDir, template);
         }
     }
 
-    private VirtualFile getSourcePath(ModuleRootModel manager, VirtualFile file) {
+    private VirtualFile getSourcePath(ModuleRootModel manager, VirtualFile template) {
         VirtualFile srcDir = null;
         for (VirtualFile sourcePath : manager.getSourceRoots()) {
-            if (file != null && file.getPresentableUrl().contains(sourcePath.getPresentableUrl())) {
+            if (template != null
+                    && template.getPresentableUrl().contains(sourcePath.getPresentableUrl())) {
                 srcDir = sourcePath;
                 break;
             }
@@ -53,12 +54,12 @@ public class TranslateAction extends AnAction {
         return srcDir;
     }
 
-    private void translateTemplate(Project project, VirtualFile srcDir, VirtualFile file) {
-        JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, file, srcDir);
+    private void translateTemplate(Project project, VirtualFile srcDir, VirtualFile template) {
+        JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, template, srcDir);
         JamonConsole console = new JamonConsole(project);
 
         if (jamonConfig != null) {
-            new JamonExecutor(jamonConfig, console).execute();
+            new JamonExecutor(project, jamonConfig, console).execute();
         }
     }
 
