@@ -4,6 +4,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -57,5 +60,30 @@ public class TranslateAction extends AnAction {
         if (jamonConfig != null) {
             new JamonExecutor(jamonConfig, console).execute();
         }
+    }
+
+    @Override
+    public void update(AnActionEvent e) {
+        DataContext dataContext = e.getDataContext();
+        Project project = DataKeys.PROJECT.getData(dataContext);
+        if (project != null) {
+            FileEditorManager editorManager = FileEditorManager.getInstance(project);
+            Editor editor = null;
+
+            if (editorManager != null) {
+                editor = editorManager.getSelectedTextEditor();
+            }
+
+            if (editor != null) {
+                VirtualFile file = FileDocumentManager.getInstance().getFile(editor.getDocument());
+                if (JamonFileType.DEFAULT_EXTENSION.equals(file.getExtension())) {
+                    e.getPresentation().setEnabled(true);
+                    return;
+                }
+
+            }
+        }
+
+        e.getPresentation().setEnabled(false);
     }
 }
