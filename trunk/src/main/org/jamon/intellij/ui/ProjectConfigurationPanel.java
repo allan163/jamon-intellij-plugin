@@ -26,6 +26,7 @@ public class ProjectConfigurationPanel implements Configurable {
     private TextFieldWithBrowseButton jamonRuntimeJar;
     private TextFieldWithBrowseButton jamonApiJar;
     private TextFieldWithBrowseButton jamonProcessorJar;
+    private JCheckBox compileSourcesCheckbox;
 
     public ProjectConfigurationPanel(Project project) {
         myProject = project;
@@ -72,6 +73,8 @@ public class ProjectConfigurationPanel implements Configurable {
             return true;
         } else if (!StringUtils.isEmpty(processor) && !processor.equals(configuration.jamonProcessorJar)) {
             return true;
+        } else if (compileSourcesCheckbox.isSelected() != configuration.compileSources) {
+            return true;
         }
 
         return false;
@@ -87,11 +90,13 @@ public class ProjectConfigurationPanel implements Configurable {
         jamonRuntimeJar.setText(configuration.jamonRuntimeJar);
         jamonApiJar.setText(configuration.jamonApiJar);
         jamonProcessorJar.setText(configuration.jamonProcessorJar);
+        compileSourcesCheckbox.setSelected(configuration.compileSources);
     }
 
     private void saveConfiguration(ConfigurationState configuration) {
         configuration.jamonRuntimeJar = jamonRuntimeJar.getText();
         configuration.jamonApiJar = jamonApiJar.getText();
         configuration.jamonProcessorJar = jamonProcessorJar.getText();
+        configuration.compileSources = compileSourcesCheckbox.isSelected();
     }
 }

@@ -11,6 +11,7 @@ import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
+import org.jamon.intellij.configuration.ConfigurationUtils;
 import org.jamon.intellij.configuration.JamonConfig;
 import org.jamon.intellij.util.Utils;
 
@@ -72,8 +73,9 @@ public class JamonExecutor {
         processHandler.addProcessListener(new ProcessAdapter() {
             @Override
             public void processTerminated(ProcessEvent event) {
-                // todo: make this execute only if the translation completed successfully.
-                Utils.invokeLater(project, new JamonSourceCompiler(project, config));
+                if (event.getExitCode() == 0 && ConfigurationUtils.shouldCompileSources(project)) {
+                    Utils.invokeLater(project, new JamonSourceCompiler(project, config));
+                }
             }
         });
 

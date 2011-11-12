@@ -1,6 +1,7 @@
 package org.jamon.intellij.execution;
 
 import com.intellij.openapi.compiler.CompilerManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -8,6 +9,7 @@ import org.jamon.intellij.configuration.JamonConfig;
 import org.jamon.intellij.util.Utils;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,6 +18,7 @@ import java.io.File;
  * Time: 10:49 PM
  */
 public class JamonSourceCompiler implements Runnable {
+    private static Logger LOGGER = Logger.getInstance(JamonSourceCompiler.class.getSimpleName());
     public static final String PROXY_EXTENSION = ".java";
     public static final String IMPL_EXTENSION = "Impl.java";
 
@@ -33,7 +36,8 @@ public class JamonSourceCompiler implements Runnable {
         VirtualFile[] generatedSources = getJavaFilesForTemplate(config);
 
         if (generatedSources != null) {
-            manager.compile(generatedSources, null, true);
+            LOGGER.warn("Compiling java sources: " + Arrays.toString(generatedSources));
+            manager.compile(generatedSources, null, false);
         }
     }
 
