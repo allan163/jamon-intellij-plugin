@@ -34,7 +34,7 @@ public class JumpToImplAction extends AnAction{
             Module module = DataKeys.MODULE.getData(dataContext);
             ModuleRootManager manager = ModuleRootManager.getInstance(module);
             VirtualFile srcDir = Utils.getSourcePath(manager, file);
-            JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, file, srcDir);
+            JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, srcDir, file);
             String filePath = getFilePathToOpen(file, jamonConfig);
             openFile(project, filePath);
         }
@@ -56,7 +56,16 @@ public class JumpToImplAction extends AnAction{
             if (extension.contains("jamon")) {
                 return getImplFileName(file, jamonConfig);
             }
+            else if (extension.contains(".java")) {
+                return getJamonFileName(file, jamonConfig);
+            }
         }
+        return null;
+    }
+
+    private String getJamonFileName(VirtualFile file, JamonConfig jamonConfig) {
+//        file.getParent().getPresentableUrl() + file.getNameWithoutExtension() + ".jamon";
+//        VirtualFile fileToOpen = LocalFileSystem.getInstance().findFileByPath();
         return null;
     }
 
