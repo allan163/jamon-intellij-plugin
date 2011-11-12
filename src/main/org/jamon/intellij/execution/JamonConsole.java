@@ -1,5 +1,6 @@
 package org.jamon.intellij.execution;
 
+import com.intellij.execution.filters.RegexpFilter;
 import com.intellij.execution.filters.TextConsoleBuilder;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.process.ProcessAdapter;
@@ -30,6 +31,10 @@ public class JamonConsole {
     public static final String CONSOLE_TITLE = "Jamon";
 
     private static final Key<JamonConsole> CONSOLE_KEY = Key.create("JAMON_CONSOLE_KEY");
+    public static final String ERROR_FILTER = 
+            RegexpFilter.FILE_PATH_MACROS + ":" 
+            + RegexpFilter.LINE_MACROS + ":" 
+            + RegexpFilter.COLUMN_MACROS + ":";
 
     private final AtomicBoolean isOpen = new AtomicBoolean(false);
     private final ConsoleView console;
@@ -76,8 +81,7 @@ public class JamonConsole {
 
     private static ConsoleView createConsoleView(Project project) {
         TextConsoleBuilder builder = TextConsoleBuilderFactory.getInstance().createBuilder(project);
-        // todo: add error filters here.
-
+        builder.addFilter(new RegexpFilter(project, ERROR_FILTER));
         return builder.getConsole();
     }
 
