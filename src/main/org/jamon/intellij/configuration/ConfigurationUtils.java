@@ -33,7 +33,7 @@ public class ConfigurationUtils {
         return files;
     }
 
-    public static JamonConfig getJamonConfig(Project project, VirtualFile file, VirtualFile srcDir) {
+    public static JamonConfig getJamonConfig(Project project, VirtualFile srcDir, VirtualFile template) {
         ConfigurationState state = project.getComponent(ConfigurationState.class);
 
         File[] jamonFiles = getJamonFiles(state);
@@ -47,7 +47,7 @@ public class ConfigurationUtils {
             }
         }
 
-        Module module = ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(file);
+        Module module = ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(template);
         File destDir = new File(state.getOutputDirectory(module));
         destDir.mkdirs();
 
@@ -58,6 +58,11 @@ public class ConfigurationUtils {
             return null;
         }
 
-        return new JamonConfig(jamonFiles, srcDir, destDir, file);
+        return new JamonConfig(jamonFiles, srcDir, destDir, template);
+    }
+
+    public static boolean shouldCompileSources(Project project) {
+        ConfigurationState state = project.getComponent(ConfigurationState.class);
+        return state.compileSources;
     }
 }

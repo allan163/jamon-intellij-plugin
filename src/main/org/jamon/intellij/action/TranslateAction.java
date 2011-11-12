@@ -55,7 +55,7 @@ public class TranslateAction extends AnAction {
     }
 
     private void translateTemplate(Project project, VirtualFile srcDir, VirtualFile template) {
-        JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, template, srcDir);
+        JamonConfig jamonConfig = ConfigurationUtils.getJamonConfig(project, srcDir, template);
         JamonConsole console = new JamonConsole(project);
 
         if (jamonConfig != null) {

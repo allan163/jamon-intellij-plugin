@@ -29,6 +29,7 @@ public class ConfigurationState implements PersistentStateComponent<Configuratio
     public String jamonRuntimeJar = "";
     public String jamonApiJar = "";
     public String jamonProcessorJar = "";
+    public boolean compileSources = true;
 
     @Tag("outputDirectories")
     private Map<String, String> outputDirectories = new HashMap<String, String>();
