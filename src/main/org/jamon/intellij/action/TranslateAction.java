@@ -10,7 +10,6 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ModuleRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jamon.intellij.configuration.ConfigurationUtils;
 import org.jamon.intellij.configuration.JamonConfig;
@@ -18,6 +17,7 @@ import org.jamon.intellij.execution.JamonConsole;
 import org.jamon.intellij.execution.JamonExecutor;
 import org.jamon.intellij.lang.file.JamonFileType;
 import org.jamon.intellij.resource.JamonIconProvider;
+import org.jamon.intellij.util.Utils;
 
 /**
  * User: Ryan Brignoni
@@ -37,21 +37,9 @@ public class TranslateAction extends AnAction {
         ModuleRootManager manager = ModuleRootManager.getInstance(module);
 
         if (template != null && JamonFileType.DEFAULT_EXTENSION.equals(template.getExtension())) {
-            VirtualFile srcDir = getSourcePath(manager, template);
+            VirtualFile srcDir = Utils.getSourcePath(manager, template);
             translateTemplate(project, srcDir, template);
         }
-    }
-
-    private VirtualFile getSourcePath(ModuleRootModel manager, VirtualFile template) {
-        VirtualFile srcDir = null;
-        for (VirtualFile sourcePath : manager.getSourceRoots()) {
-            if (template != null
-                    && template.getPresentableUrl().contains(sourcePath.getPresentableUrl())) {
-                srcDir = sourcePath;
-                break;
-            }
-        }
-        return srcDir;
     }
 
     private void translateTemplate(Project project, VirtualFile srcDir, VirtualFile template) {
