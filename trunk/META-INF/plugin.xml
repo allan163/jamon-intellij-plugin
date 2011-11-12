@@ -20,6 +20,11 @@
           <keyboard-shortcut first-keystroke="control alt shift J" keymap="Mac OS X"/>
           <add-to-group group-id="MainToolBar" anchor="after" relative-to-action="tasks.toolbar.group"/>
       </action>
+      <action id="org.jamon.intellij.action.JumpToImplAction"
+              class="org.jamon.intellij.action.JumpToImplAction" text="Jump to Implementation">
+          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt I"/>
+          <add-to-group group-id="MainToolBar" anchor="after" relative-to-action="tasks.toolbar.group"/>
+      </action>
       <action id="CreateJamonFile" class="org.jamon.intellij.action.NewJamonTemplateAction"
               text="Jamon" description="Create a new Jamon file.">
           <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
