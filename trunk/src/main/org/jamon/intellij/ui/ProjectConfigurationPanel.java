@@ -30,9 +30,6 @@ public class ProjectConfigurationPanel implements Configurable {
 
     public ProjectConfigurationPanel(Project project) {
         myProject = project;
-        addJarListener(jamonRuntimeJar, JAMON_RUNTIME);
-        addJarListener(jamonApiJar, JAMON_API);
-        addJarListener(jamonProcessorJar, JAMON_PROCESSOR);
     }
 
     private void addJarListener(TextFieldWithBrowseButton field, String jarName) {
@@ -54,6 +51,9 @@ public class ProjectConfigurationPanel implements Configurable {
     }
 
     public JComponent createComponent() {
+        addJarListener(jamonRuntimeJar, JAMON_RUNTIME);
+        addJarListener(jamonApiJar, JAMON_API);
+        addJarListener(jamonProcessorJar, JAMON_PROCESSOR);
         return rootComponent;
     }
 
