@@ -70,21 +70,23 @@ public class JamonExecutor {
             console.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
         }
 
-        processHandler.addProcessListener(new ProcessAdapter() {
-            @Override
-            public void processTerminated(ProcessEvent event) {
-                if (event.getExitCode() == 0 && ConfigurationUtils.shouldCompileSources(project)) {
-                    Utils.invokeLater(project, new JamonSourceCompiler(project, config));
-                }
-            }
-        });
-
-        processHandler.startNotify();
-        processHandler.waitFor();
-
         if (processHandler != null) {
-            processHandler.destroyProcess();
+            processHandler.addProcessListener(new ProcessAdapter() {
+                @Override
+                public void processTerminated(ProcessEvent event) {
+                    if (event.getExitCode() == 0 && ConfigurationUtils.shouldCompileSources(project)) {
+                        Utils.invokeLater(project, new JamonSourceCompiler(project, config));
+                    }
+                }
+            });
+
+            processHandler.startNotify();
             processHandler.waitFor();
+
+            if (processHandler != null) {
+                processHandler.destroyProcess();
+                processHandler.waitFor();
+            }
         }
     }
 }
