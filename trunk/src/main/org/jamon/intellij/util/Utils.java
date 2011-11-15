@@ -25,14 +25,12 @@ public class Utils {
     }
 
     public static VirtualFile getSourcePath(ModuleRootModel manager, VirtualFile template) {
-        VirtualFile srcDir = null;
         for (VirtualFile sourcePath : manager.getSourceRoots()) {
             if (template != null
                     && template.getPresentableUrl().contains(sourcePath.getPresentableUrl())) {
-                srcDir = sourcePath;
-                break;
+                return sourcePath;
             }
         }
-        return srcDir;
+        return null;
     }
 }
