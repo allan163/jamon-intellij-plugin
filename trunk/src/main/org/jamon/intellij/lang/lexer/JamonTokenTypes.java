@@ -13,9 +13,14 @@ import org.jamon.intellij.lang.element.JamonElement;
 public interface JamonTokenTypes {
     IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
+    IElementType OUTPUT = new JamonElement("OUTPUT");
     IElementType COMMENT = new JamonElement("COMMENT");
-    IElementType TAG_START_PERCENT = new JamonElement("TAG_START_PERCENT");     // <%
-    IElementType TAG_END_PERCENT = new JamonElement("TAG_END_PERCENT");         // %>
-    IElementType TAG_CLOSE_PERCENT = new JamonElement("TAG_CLOSE_PERCENT");     // </%
+    IElementType PERCENT_TAG_START = new JamonElement("TAG_START_PERCENT");     // <%
+    IElementType PERCENT_TAG_END = new JamonElement("TAG_END_PERCENT");         // %>
+    IElementType PERCENT_TAG_CLOSE = new JamonElement("TAG_CLOSE_PERCENT");     // </%
     IElementType GENERIC_TAG_END = new JamonElement("GENERIC_TAG_END");         // >
+
+    IElementType JAMON_PERCENT_TAG = new JamonElement("JAMON_PERCENT_TAG");
+    IElementType JAMON_PERCENT_TAG_CLOSE = new JamonElement("JAMON_PERCENT_TAG_CLOSE");
+    IElementType TAG_ARGS = new JamonElement("TAG_ARGS");
 }
