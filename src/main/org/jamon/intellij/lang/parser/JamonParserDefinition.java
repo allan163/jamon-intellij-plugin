@@ -4,7 +4,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -17,8 +16,8 @@ import org.jamon.intellij.lang.JamonWrapperPsiElement;
 import org.jamon.intellij.lang.file.JamonFile;
 import org.jamon.intellij.lang.file.JamonFileElementType;
 import org.jamon.intellij.lang.file.JamonFileType;
-import org.jamon.intellij.lang.lexer.JamonParsingLexer;
-import org.jamon.intellij.lang.lexer.JamonTokenTypes;
+import org.jamon.intellij.lang.highlighter.JamonSyntaxHighlighter;
+import org.jamon.intellij.lang.lexer.JamonLexer;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -29,11 +28,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public class JamonParserDefinition implements ParserDefinition {
     public static final IFileElementType JAMON_FILE = new JamonFileElementType(JamonFileType.JAMON_LANGUAGE);
-    private static final Logger LOGGER = Logger.getInstance(JamonParserDefinition.class.getSimpleName());
 
     @NotNull
     public Lexer createLexer(Project project) {
-        return new JamonParsingLexer();
+        return new JamonLexer();
     }
 
     public PsiParser createParser(Project project) {
@@ -46,12 +44,12 @@ public class JamonParserDefinition implements ParserDefinition {
 
     @NotNull
     public TokenSet getWhitespaceTokens() {
-        return TokenSet.create(JamonTokenTypes.WHITE_SPACE);
+        return TokenSet.create(JamonSyntaxHighlighter.WHITE_SPACE);
     }
 
     @NotNull
     public TokenSet getCommentTokens() {
-        return TokenSet.create(JamonTokenTypes.COMMENT);
+        return TokenSet.create(JamonSyntaxHighlighter.COMMENT);
     }
 
     @NotNull
