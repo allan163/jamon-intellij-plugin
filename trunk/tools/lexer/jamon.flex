@@ -3,6 +3,7 @@ package org.jamon.intellij.lang.lexer;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.openapi.diagnostic.Logger;
+import org.jamon.intellij.lang.element.JamonElementTypes;
 
 /**
  * This class was generated using JFlex on the jamon.flex file. Do not modify it directly.
@@ -37,23 +38,23 @@ TAG_NAME = [:letter:]+
 
 %%
 <YYINITIAL> {
-    {PERCENT_TAG_OPEN} {TAG_NAME} ">"   { return JamonTokenTypes.JAMON_PERCENT_TAG; }
-    {PERCENT_TAG_OPEN} {TAG_NAME}       { yybegin(PERCENT_TAG); yypushback(yylength()); }
-    {PERCENT_TAG_OPEN} {WHITESPACE}     { yybegin(TAG_EMIT); yypushback(yylength()); }
-    {PERCENT_TAG_CLOSE} {TAG_NAME} ">"  { return JamonTokenTypes.JAMON_PERCENT_TAG_CLOSE; }
+    {PERCENT_TAG_OPEN} {TAG_NAME} ">"                   { return JamonTokenTypes.JAMON_PERCENT_TAG; }
+    {PERCENT_TAG_OPEN} {TAG_NAME}                       { yybegin(PERCENT_TAG); yypushback(yylength()); }
+    {PERCENT_TAG_OPEN} {WHITESPACE}                     { yybegin(TAG_EMIT); yypushback(yylength()); }
+    {PERCENT_TAG_CLOSE} {TAG_NAME} ">"                  { return JamonTokenTypes.JAMON_PERCENT_TAG_CLOSE; }
 }
 
 <PERCENT_TAG> {
     {PERCENT_TAG_OPEN} {TAG_NAME} {WHITESPACE}          { return JamonTokenTypes.JAMON_PERCENT_TAG; }
     ">"                                                 { yybegin(YYINITIAL); return JamonTokenTypes.GENERIC_TAG_END; }
     {PERCENT_TAG_END}                                   { yybegin(YYINITIAL); return JamonTokenTypes.PERCENT_TAG_END; }
-    .                                                 { return JamonTokenTypes.TAG_ARGS; }
+    .                                                   { return JamonTokenTypes.TAG_ARGS; }
 }
 
 <TAG_EMIT> {
-    {PERCENT_TAG_OPEN}  { return JamonTokenTypes.PERCENT_TAG_START; }
-    {PERCENT_TAG_END}   { yybegin(YYINITIAL); return JamonTokenTypes.PERCENT_TAG_END; }
-    .                   { return JamonTokenTypes.OUTPUT; }
+    {PERCENT_TAG_OPEN}                                  { return JamonTokenTypes.PERCENT_TAG_START; }
+    {PERCENT_TAG_END}                                   { yybegin(YYINITIAL); return JamonTokenTypes.PERCENT_TAG_END; }
+    .                                                   { return JamonTokenTypes.OUTPUT; }
 }
 
-.|\n                { return JamonTokenTypes.BAD_CHARACTER; }
+.|\n                                                    { return JamonElementTypes.OUTPUT; }

@@ -3,6 +3,7 @@ package org.jamon.intellij.lang.lexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jamon.intellij.lang.element.JamonElement;
+import org.jamon.intellij.lang.element.OutputElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +14,7 @@ import org.jamon.intellij.lang.element.JamonElement;
 public interface JamonTokenTypes {
     IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
-    IElementType OUTPUT = new JamonElement("OUTPUT");
+    IElementType OUTPUT = new OutputElement("OUTPUT");
     IElementType COMMENT = new JamonElement("COMMENT");
     IElementType PERCENT_TAG_START = new JamonElement("TAG_START_PERCENT");     // <%
     IElementType PERCENT_TAG_END = new JamonElement("TAG_END_PERCENT");         // %>

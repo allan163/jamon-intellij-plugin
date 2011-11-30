@@ -36,8 +36,10 @@
       <projectConfigurable implementation="org.jamon.intellij.ui.ProjectConfigurationPanel"/>
       <moduleConfigurable implementation="org.jamon.intellij.ui.ModuleConfigurationTab" />
       <fileTypeFactory implementation="org.jamon.intellij.lang.file.JamonFileTypeFactory" />
+      <!--<fileType.fileViewProviderFactory filetype="jamon" implementationClass="org.jamon.intellij.lang.file.JamonFileViewProviderFactory" />-->
       <lang.parserDefinition language="jamon" implementationClass="org.jamon.intellij.lang.parser.JamonParserDefinition" />
       <lang.syntaxHighlighterFactory key="jamon" implementationClass="org.jamon.intellij.lang.highlighter.JamonSyntaxHighlighterFactory" />
+      <lang.fileViewProviderFactory language="jamon" implementationClass="org.jamon.intellij.lang.file.JamonFileViewProviderFactory" />
   </extensions>
     <module-components>
         <component>
