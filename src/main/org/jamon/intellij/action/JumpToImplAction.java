@@ -34,7 +34,7 @@ public class JumpToImplAction extends AnAction{
       Project project = DataKeys.PROJECT.getData(dataContext);
 
       if (project != null) {
-          VirtualFile file = DataKeys.VIRTUAL_FILE.getData(dataContext);
+        VirtualFile file = DataKeys.VIRTUAL_FILE.getData(dataContext);
         if (file != null) {
             PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
             Module module = DataKeys.MODULE.getData(dataContext);
@@ -47,7 +47,24 @@ public class JumpToImplAction extends AnAction{
       }
     }
 
-    private void openFile(Project project, String filePath) {
+  @Override
+  public void update(AnActionEvent e) {
+    String extension = getExtension(e);
+    if ("jamon".equals(extension)) {
+      e.getPresentation().setText("Jump to Impl");
+    }
+    else if ("java".equals(extension)) {
+      e.getPresentation().setText("Jump to Jamon");
+    }
+    super.update(e);
+  }
+
+  private String getExtension(AnActionEvent e) {
+    VirtualFile file = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
+    return file == null ? null : file.getExtension();
+  }
+
+  private void openFile(Project project, String filePath) {
         VirtualFile fileToOpen = LocalFileSystem.getInstance().findFileByPath(filePath);
         if (fileToOpen != null) {
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
