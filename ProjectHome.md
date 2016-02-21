@@ -1,0 +1,1 @@
+This is an IntelliJ IDEA 9+ plugin to support the Jamon templating engine. See http://jamon.org for details about Jamon.
